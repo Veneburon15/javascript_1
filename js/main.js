@@ -34,7 +34,7 @@ for (let i = 0; i < promedios.length; i++) {
 let promedioFinal = sumaPromedios / promedios.length;
 
 //Devolución final de datos
-let permiso_2 = prompt ("¿Desea ver un resumen de la cantidad de alumnos ingresados y el promedio total entre ellos? Si es ese al caso escriba `Si`, de lo contrario, escriba cualquier letra");
+let permiso_2 = prompt ("¿Desea ver un resumen de la cantidad de alumnos ingresados y el promedio total entre ellos? Si es ese el caso escriba `Si`, de lo contrario, escriba cualquier letra");
 if (permiso_2 === "Si"){
     alert ("La cantidad de alumnos ingresados es: " + promedios.length)
     alert("El promedio final de todos sus alumnos es: " + promedioFinal);
