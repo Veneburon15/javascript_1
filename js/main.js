@@ -6,7 +6,7 @@ let permiso = prompt ("Si desea promediar a un alumno escriba `Si`, de lo contra
 while (permiso === "Si"){
     alert ("Gracias por usar nuestra plataforma de promediación");
     studentProm()
-    permiso = prompt("Si desea continuar promediando escriba `Si`, de lo contrario, escriba cualquier letra")
+    permiso = prompt("Si desea continuar promediando escriba `si`, de lo contrario, escriba cualquier letra")
 }
 
 //Función principal
@@ -34,5 +34,11 @@ for (let i = 0; i < promedios.length; i++) {
 let promedioFinal = sumaPromedios / promedios.length;
 
 //Devolución final de datos
-alert ("La cantidad de alumnos ingresados es: " + promedios.length)
-alert("El promedio final de todos sus alumnos es: " + promedioFinal);
+let permiso_2 = prompt ("¿Desea ver un resumen de la cantidad de alumnos ingresados y el promedio total entre ellos? Si es ese al caso escriba `Si`, de lo contrario, escriba cualquier letra");
+if (permiso_2 === "Si"){
+    alert ("La cantidad de alumnos ingresados es: " + promedios.length)
+    alert("El promedio final de todos sus alumnos es: " + promedioFinal);
+}
+else{
+    alert("Muchas gracias por utilizar nuestra plataforma de promediación");
+}
