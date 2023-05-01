@@ -1,47 +1,100 @@
-//FUNCIONES
+//ARREGLO PRINCIPAL
 let estudiantes = []
 //CICLO PRINCIPAL
 let permiso = prompt ("Si desea ingresar las notas de un alumno, escriba 'Si'. De lo contrario, escriba cualquier letra para salir")
 while (permiso.toLowerCase() == "si"){
-    alert ("Gracias por usar nuestra plataforma de promediación");
     studentProm()
     permiso = prompt("Si desea continuar promediando escriba `Si`, de lo contrario, escriba cualquier letra")
 };
 
 //Devolución final de datos
-let permiso_2 = prompt ("¿Desea ver los datos de todos los alumnos ingresados? Si es ese el caso escriba `1`" + "\n" + 
-"Si desea ver el número total de estudiantes que ingresó y el promedio total entre ellos, escriba `2`" + "\n" +
-"Si desea salir de la plataforma, escriba `3`");
+const OPCION_ALUMNOS_INGRESADOS = 1;
+const OPCION_RESUMEN_ALUMNOS = 2;
+const OPCION_SALIR = 3;
 
-switch (permiso_2){
-    case "1": 
-        showData();
-    break;
-    case "2":
-        showData_2();
-    break;
-    case "3":
-        alert("Muchas gracias por usar nuestra plataforma de promediación");
-    break;
+switch (mostrarMenu()) {
+    case OPCION_ALUMNOS_INGRESADOS:
+      showData();
+      break;
+    case OPCION_RESUMEN_ALUMNOS:
+      showData_2();
+      break;
+    case OPCION_SALIR:
+      alert("Saliendo del programa");
+      break;
     default:
-        alert("Muchas gracias por usar nuestra plataforma de promediación");
-    break;
-};
+      alert("Opción inválida");
+      break;
+  }
 
 //FUNCIONES
-//Función principal
-function studentProm(){
-    let alumno = prompt ("Ingrese el nombre del alumno");
-    alert ("El nombre del alumno es: " + alumno);
-    let nota1 = Number(prompt ("Ingrese la nota del primer exámen: "));
-    let nota2 = Number(prompt ("Ingrese la nota del segundo exámen: "));
-    let nota3 = Number(prompt ("Ingrese la nota del tercer exámen: "));
-    let promedioTotal = (nota1 + nota2 + nota3) / 3;
-    let estudiante = {nombre: alumno, nota1: nota1, nota2: nota2, nota3: nota3, promedios: promedioTotal};
+//CORE FUNCTION
+function studentProm() {
+    alert ("Gracias por usar nuestra plataforma de promediación");
+    dataSolicitation();
+}
+//Solicitud de datos
+function dataSolicitation(){
+    let nombreAlumno = nameInput();
+    let nota_1 = pedirNota(1);
+    let nota_2 = pedirNota(2);
+    let nota_3 = pedirNota(3);
+    let promedio = calcularPromedio(nota_1, nota_2, nota_3);
+    studentAdd (nombreAlumno, nota_1, nota_2, nota_3, promedio);
+    alert("El promedio del alumno es: " + promedio)
+}
+
+
+//Pedir el nombre
+function nameInput(){
+    let alumno = "";
+    let regex = /^[a-zA-Z\s]+$/;
+    while (!regex.test(alumno)) {
+      alumno = prompt("Ingrese el nombre del alumno");
+      if (!regex.test(alumno)) {
+        alert(
+          "Error: El nombre del alumno debe contener solo letras y espacios"
+        );
+      }
+    }
+    return alumno;
+}
+//Solicitud de nota y validación
+function pedirNota(notaNum){
+    let nota = Number(prompt(`Ingrese la nota del ${notaNum}º examen:`));
+    while (isNaN(nota) || nota < 0 || nota > 20) {
+      alert("Error: La nota debe estar entre 0 y 20");
+      nota = Number(prompt(`Ingrese nuevamente la nota del ${notaNum}º examen:`));
+    }
+    return nota;
+}
+//Cálculo del promedio
+function calcularPromedio(nota_1, nota_2, nota_3){
+    let promedio = (nota_1 + nota_2 + nota_3) / 3;
+    return promedio.toFixed(2);
+}
+//Adición de datos al arreglo
+function studentAdd(nombre, nota_1, nota_2, nota_3, promedio){
+    let estudiante = {nombre: nombre, nota1: nota_1, nota2: nota_2, nota3: nota_3, promedio: promedio};
     estudiantes.push(estudiante);
-    alert ("El promedio del alumno es: " + promedioTotal);
-};
-//Función de devolución
+}
+
+
+//FUNCIONES DEL SWITCH
+//CICLO PRINCIPAL
+function mostrarMenu() {
+    let opcion = 0;
+    while (opcion < OPCION_ALUMNOS_INGRESADOS || opcion > OPCION_SALIR) {
+      opcion = Number(prompt(`Ingrese una opción:
+        ${OPCION_ALUMNOS_INGRESADOS}. Datos de todos los alumnos ingresados
+        ${OPCION_RESUMEN_ALUMNOS}. Número total de estudiantes que ingresó y el promedio total entre ellos
+        ${OPCION_SALIR}. Salir`));
+    }
+    return opcion;
+  }
+
+//FUNCIONES DE DEVOLUCIÓN
+//Devolucion de cada estudiante
 function showData(){
     let mensaje = "";
     for (let i = 0; i < estudiantes.length; i++) {
@@ -54,16 +107,16 @@ function showData(){
     }
     alert(mensaje);
 };
-
+//Devolución resumida
 function showData_2(){
     let promedioFinal = 0;
-    let mensaje_2 = "";
+    let mensaje = "";
     for (let i = 0; i < estudiantes.length; i++) {
         promedioFinal += estudiantes[i].promedios;
     }
     promedioFinal = promedioFinal/estudiantes.length;
-    mensaje_2 += "Cantidad total de estudiantes ingresados: " + estudiantes.length + "\n" +
+    mensaje += "Cantidad total de estudiantes ingresados: " + estudiantes.length + "\n" +
                 "Promedio final de todos los estudiantes: " + promedioFinal;
-    alert(mensaje_2);
+    alert(mensaje);
 };
 
