@@ -11,8 +11,7 @@ while (permiso.toLowerCase() == "si"){
 const OPCION_ALUMNOS = 1   
 const OPCION_ALUMNOS_PROMEDIOS = 2;
 const OPCION_ALUMNOS_INGRESADOS = 3;
-const OPCION_RESUMEN_ALUMNOS = 4;
-const OPCION_SALIR = 5;
+const OPCION_SALIR = 4;
 
 switch (mostrarMenu()) {
     case OPCION_ALUMNOS: 
@@ -23,9 +22,6 @@ switch (mostrarMenu()) {
         break;
     case OPCION_ALUMNOS_INGRESADOS:
       showData();
-      break;
-    case OPCION_RESUMEN_ALUMNOS:
-      showData_2();
       break;
     case OPCION_SALIR:
       alert("Saliendo del programa");
@@ -97,7 +93,6 @@ function mostrarMenu() {
         ${OPCION_ALUMNOS}. Mostrar nombres de los alumnos ingresados
         ${OPCION_ALUMNOS_PROMEDIOS}. Mostrar nombres de los alumnos y sus promedios
         ${OPCION_ALUMNOS_INGRESADOS}. Datos de todos los alumnos ingresados
-        ${OPCION_RESUMEN_ALUMNOS}. Número total de estudiantes que ingresó y el promedio total entre ellos
         ${OPCION_SALIR}. Salir`));
     };
     return opcion;
@@ -126,19 +121,6 @@ function showData(){
                    "Nota 2: " + estudiantes[i].nota2 + "\n" +
                    "Nota 3: " + estudiantes[i].nota3 + "\n" +
                    "Promedio: " + estudiantes[i].promedio + "\n\n";
-    }
+    };
     alert(mensaje);
 };
-//Devolución resumida
-function showData_2(){
-    let sumaPromedios = 0;
-    let mensaje = "";
-    for (let i = 0; i < estudiantes.length; i++) {
-        sumaPromedios += estudiantes[i].promedios;
-    }
-    promedioAbsoluto = sumaPromedios / estudiantes.length;
-    mensaje += "Cantidad total de estudiantes ingresados: " + estudiantes.length + "\n" +
-                "Promedio final de todos los estudiantes: " + promedioAbsoluto;
-    alert(mensaje);
-};
-
