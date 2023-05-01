@@ -1,13 +1,34 @@
 //FUNCIONES
 let estudiantes = []
 //CICLO PRINCIPAL
-let permiso = prompt ("Si desea promediar a un alumno escriba `Si`, de lo contrario, escriba cualquier letra)")
+let permiso = prompt ("Si desea ingresar las notas de un alumno, escriba 'Si'. De lo contrario, escriba cualquier letra para salir")
 while (permiso.toLowerCase() == "si"){
     alert ("Gracias por usar nuestra plataforma de promediación");
     studentProm()
     permiso = prompt("Si desea continuar promediando escriba `Si`, de lo contrario, escriba cualquier letra")
-}
+};
 
+//Devolución final de datos
+let permiso_2 = prompt ("¿Desea ver los datos de todos los alumnos ingresados? Si es ese el caso escriba `1`" + "\n" + 
+"Si desea ver el número total de estudiantes que ingresó y el promedio total entre ellos, escriba `2`" + "\n" +
+"Si desea salir de la plataforma, escriba `3`");
+
+switch (permiso_2){
+    case "1": 
+        showData();
+    break;
+    case "2":
+        showData_2();
+    break;
+    case "3":
+        alert("Muchas gracias por usar nuestra plataforma de promediación");
+    break;
+    default:
+        alert("Muchas gracias por usar nuestra plataforma de promediación");
+    break;
+};
+
+//FUNCIONES
 //Función principal
 function studentProm(){
     let alumno = prompt ("Ingrese el nombre del alumno");
@@ -19,47 +40,30 @@ function studentProm(){
     let estudiante = {nombre: alumno, nota1: nota1, nota2: nota2, nota3: nota3, promedios: promedioTotal};
     estudiantes.push(estudiante);
     alert ("El promedio del alumno es: " + promedioTotal);
-}
-    //Función de promediación
+};
+//Función de devolución
+function showData(){
+    let mensaje = "";
+    for (let i = 0; i < estudiantes.length; i++) {
+        mensaje += "Estudiante #" + (i + 1) + ":\n" +
+                   "Nombre: " + estudiantes[i].nombre + "\n" +
+                   "Nota 1: " + estudiantes[i].nota1 + "\n" +
+                   "Nota 2: " + estudiantes[i].nota2 + "\n" +
+                   "Nota 3: " + estudiantes[i].nota3 + "\n" +
+                   "Promedio: " + estudiantes[i].promedios + "\n\n";
+    }
+    alert(mensaje);
+};
 
+function showData_2(){
+    let promedioFinal = 0;
+    let mensaje_2 = "";
+    for (let i = 0; i < estudiantes.length; i++) {
+        promedioFinal += estudiantes[i].promedios;
+    }
+    promedioFinal = promedioFinal/estudiantes.length;
+    mensaje_2 += "Cantidad total de estudiantes ingresados: " + estudiantes.length + "\n" +
+                "Promedio final de todos los estudiantes: " + promedioFinal;
+    alert(mensaje_2);
+};
 
-for (let i = 0; i < estudiantes.length; i++) {
-    console.log("Estudiante #" + (i + 1) + ":");
-    console.log("Nombre: " + estudiantes[i].nombre);
-    console.log("Nota 1: " + estudiantes[i].nota1);
-    console.log("Nota 2: " + estudiantes[i].nota2);
-    console.log("Nota 3: " + estudiantes[i].nota3);
-    console.log("Promedio: " + estudiantes[i].promedios);
-  }
-
-//Devolución final de datos
-let permiso_2 = prompt ("¿Desea ver un resumen de la cantidad de alumnos ingresados y el promedio total entre ellos? Si es ese el caso escriba `Si`, de lo contrario, escriba cualquier letra");
-if (permiso_2.toLowerCase() == "si"){
-    alert ("La cantidad de alumnos ingresados es: " + promedios.length)
-    alert("El promedio final de todos sus alumnos es: " + promedioFinal);
-}
-else{
-    alert("Muchas gracias por utilizar nuestra plataforma de promediación");
-}
-
-//Devolución detallada de estudiantes y sus promedios
-// let permiso_3 = prompt ("¿Desea ver una lista detallada de cada estudiante ingresado y sus respectivas notas y promedios? Si es ese el caso escriba `Si`, de lo contrario, escriba cualquier letra");
-// if (permiso_3.toLowerCase() == "si"){
-//     alert ()
-//     for (let i = 0; i < promedios.length; i++) {
-//         console.log(`Nombre: ${promedios[i].nombre}`);
-//         console.log(`Nota 1: ${promedios[i].nota_1}`);
-//         console.log(`Nota 2: ${promedios[i].nota_2}`);
-//         console.log(`Nota 3: ${promedios[i].nota_3}`);
-//         console.log(`Promedio: ${promedios[i].promedio}`);
-//       }
-// }
-
-
-
-// // Promedio de todos los valores almacenados en la variable "promedios"
-// let sumaPromedios = 0;
-// for (let i = 0; i < promedios.length; i++) {
-//     sumaPromedios += promedios[i];
-// }
-// let promedioFinal = sumaPromedios / promedios.length;
